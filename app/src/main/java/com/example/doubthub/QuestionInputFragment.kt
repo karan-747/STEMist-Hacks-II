@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -80,7 +82,26 @@ class QuestionInputFragment : Fragment(R.layout.fragment_question_input) {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_question_input,container,false)
+        val subjects = resources.getStringArray(R.array.Subjects)
+        val classes = resources.getStringArray(R.array.Classes)
 
+        binding.spnClass.onItemSelectedListener = object : OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
+        binding.spnSubject.onItemSelectedListener = object : OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
         binding.imgBtnCamera.setOnClickListener(){
             startCrop()
         }
