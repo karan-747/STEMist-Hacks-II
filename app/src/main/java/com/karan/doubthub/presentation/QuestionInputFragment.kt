@@ -1,4 +1,4 @@
-package com.karan.doubthub
+package com.karan.doubthub.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,12 +13,13 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
-import com.example.doubthub.R
-import com.example.doubthub.databinding.FragmentQuestionInputBinding
+
 
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import com.karan.doubthub.R
+import com.karan.doubthub.databinding.FragmentQuestionInputBinding
 
 
 class QuestionInputFragment : Fragment(R.layout.fragment_question_input) {

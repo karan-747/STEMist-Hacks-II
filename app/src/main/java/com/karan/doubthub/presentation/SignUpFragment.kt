@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.doubthub.R
-import com.example.doubthub.databinding.FragmentSignUpBinding
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,12 +28,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+import com.karan.doubthub.R
+import com.karan.doubthub.databinding.FragmentSignUpBinding
+import com.karan.doubthub.presentation.viewmodel.LoginSignUpVM
+
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private lateinit var  binding : FragmentSignUpBinding
     private lateinit var firebaseAuth : FirebaseAuth
     private lateinit var  googleSignInClient : GoogleSignInClient
+    private lateinit var mViewModel: ViewModel
 
 
 
@@ -62,6 +68,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_sign_up,container,false)
+        mViewModel = ViewModelProvider(this)[LoginSignUpVM::class.java]
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(Keys.WEB_CLIENT_ID)
             .requestEmail()
@@ -77,7 +84,23 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             signInWithGoogle()
         }
 
+        binding.btnLogin.setOnClickListener(){
+            if(checkInputFields()){
+               signUpNewUser()
+            }
+            else{
+                Toast.makeText(requireContext(),"Please enter input fields...",Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return binding.root
+    }
+
+    private fun signUpNewUser() {
+        val userName= binding.etUsername.text.toString()
+        val email= binding.etEmail.text.toString()
+        val password= binding.etPassword.text.toString()
+
     }
 
 
@@ -108,6 +131,16 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         else{
             Toast.makeText(requireContext(),task.exception?.message,Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun checkInputFields():Boolean{
+        val userName= binding.etUsername.text.toString()
+        val email= binding.etEmail.text.toString()
+        val password= binding.etPassword.text.toString()
+        if(userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
+            return true
+        }
+        return false
     }
 
 }

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.example.doubthub.R
-import com.example.doubthub.databinding.FragmentLoginBinding
+import com.karan.doubthub.R
+import com.karan.doubthub.databinding.FragmentLoginBinding
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {

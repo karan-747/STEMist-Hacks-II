@@ -1,8 +1,8 @@
-package com.karan.doubthub
+package com.karan.doubthub.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.doubthub.R
+import com.karan.doubthub.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
