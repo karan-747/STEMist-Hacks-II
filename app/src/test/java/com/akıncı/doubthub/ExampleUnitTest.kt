@@ -1,4 +1,4 @@
-package com.example.doubthub
+package com.akıncı.doubthub
 
 import org.junit.Test
 

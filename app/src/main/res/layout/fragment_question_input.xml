@@ -9,7 +9,7 @@
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".QuestionInputFragment">
+        tools:context="com.karan.doubthub.QuestionInputFragment">
 
         <FrameLayout
             android:id="@+id/frameLayout2"

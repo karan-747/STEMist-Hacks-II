@@ -1,4 +1,4 @@
-package com.example.doubthub.presentation
+package com.karan.doubthub.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.example.doubthub.R
-import com.example.doubthub.databinding.FragmentLoginBinding
+import com.akıncı.doubthub.R
+import com.akıncı.doubthub.databinding.FragmentLoginBinding
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {

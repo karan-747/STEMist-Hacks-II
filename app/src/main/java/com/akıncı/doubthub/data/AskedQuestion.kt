@@ -1,4 +1,4 @@
-package com.example.doubthub.data
+package com.karan.doubthub.data
 
 data class AskedQuestion(
 

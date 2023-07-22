@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/questionInputFragment"
-        android:name="com.example.doubthub.QuestionInputFragment"
+        android:name="com.karan.doubthub.QuestionInputFragment"
         android:label="fragment_question_input"
         tools:layout="@layout/fragment_question_input" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.doubthub.presentation.LoginFragment"
+        android:name="com.karan.doubthub.presentation.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.doubthub.presentation.SignUpFragment"
+        android:name="com.karan.doubthub.presentation.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

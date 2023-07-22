@@ -3,6 +3,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string name="facebook_app_id">802138727957611</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
     <string-array name="Classes">
 
         <item>Class 1</item>
@@ -18,6 +23,9 @@
         <item>Class 11</item>
         <item>Class 12</item>
     </string-array>
+
+
+
 
     <string-array name="Subjects">
 
