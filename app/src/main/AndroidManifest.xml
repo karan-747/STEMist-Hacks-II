@@ -19,7 +19,7 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.karan.doubthub.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
