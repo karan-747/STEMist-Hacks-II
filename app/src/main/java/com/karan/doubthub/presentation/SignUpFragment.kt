@@ -38,7 +38,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var  binding : FragmentSignUpBinding
     private lateinit var firebaseAuth : FirebaseAuth
     private lateinit var  googleSignInClient : GoogleSignInClient
-    private lateinit var mViewModel: ViewModel
+    private lateinit var mViewModel: LoginSignUpVM
 
 
 
@@ -51,15 +51,28 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
     private fun updateUI(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken,null)
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
-            if(it.isSuccessful){
-                Toast.makeText(requireContext(),"Logged in",Toast.LENGTH_SHORT).show()
-                navigateToHome()
-            }
-            else{
-                Toast.makeText(requireContext(),it.exception?.toString(),Toast.LENGTH_SHORT).show()
+        binding.progressBar.visibility = View.GONE
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = mViewModel.signInUserWithGoogle(account)
+            withContext(Dispatchers.Main){
+                if(result.first){
+                    Toast.makeText(requireContext(),result.second,Toast.LENGTH_SHORT).show()
+                    navigateToHome()
+                }
+                else{
+                    Toast.makeText(requireContext(),result.second,Toast.LENGTH_SHORT).show()
+                }
             }
         }
+//        firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
+//            if(it.isSuccessful){
+//                Toast.makeText(requireContext(),"Logged in",Toast.LENGTH_SHORT).show()
+//                navigateToHome()
+//            }
+//            else{
+//                Toast.makeText(requireContext(),it.exception?.toString(),Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
     override fun onCreateView(
@@ -68,7 +81,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_sign_up,container,false)
-        mViewModel = ViewModelProvider(this)[LoginSignUpVM::class.java]
+
+        mViewModel = ViewModelProvider(this@SignUpFragment)[LoginSignUpVM::class.java]
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(Keys.WEB_CLIENT_ID)
             .requestEmail()
@@ -100,6 +115,22 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         val userName= binding.etUsername.text.toString()
         val email= binding.etEmail.text.toString()
         val password= binding.etPassword.text.toString()
+        binding.progressBar.visibility = View.VISIBLE
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = mViewModel.signUpUser(userName,email,password)
+            withContext(Dispatchers.Main){
+                if(result.first){
+                    binding.progressBar.visibility = View.GONE
+                    navigateToHome()
+                }
+                else{
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(),result.second,Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
 
     }
 
@@ -110,6 +141,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             delay(3500)
             withContext(Dispatchers.Main){
                 binding.cvSignUp.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 binding.root.findNavController().navigate(R.id.action_signUpFragment_to_questionInputFragment)
             }
         }
